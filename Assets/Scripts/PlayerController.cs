@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     Vector3 velocity;
 
     bool isGrounded;
-    bool isMoving;
+    public static bool isMoving;
 
     private Vector3 lastPosition = new Vector3(0,0,0);
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GrounCheck
+        //GroundCheck
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         
         //Resetting the default velocity
@@ -43,10 +43,10 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         //calculate move direction , right is red line, forward is blue (from editor)
-        Vector3 move = transform.right * x + transform.forward * z;  
+        Vector3 move = transform.right * x + transform.forward * z;
 
 
-        characterController.Move(move*speed*Time.deltaTime);
+        characterController.Move(speed * Time.deltaTime * move);
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -56,10 +56,10 @@ public class PlayerController : MonoBehaviour
 
         //falling down
 
-        velocity.y -= gravity*Time.deltaTime;
+        velocity.y += gravity*Time.deltaTime;
 
         //executing the jump
-        characterController.Move(velocity * Time.deltaTime);
+         characterController.Move(velocity * Time.deltaTime);
 
 
         if(lastPosition != gameObject.transform.position && isGrounded == true)

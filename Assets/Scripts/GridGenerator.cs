@@ -6,7 +6,7 @@ using UnityEngine;
 public class GridGenerator : MonoBehaviour
 {
     public GameObject blockGameObject;
-
+   // public Transform jumpPads;
     private List<GameObject> blocks = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
@@ -34,10 +34,12 @@ public class GridGenerator : MonoBehaviour
             platformPosition.y = platformHeight;
 
             // Instantiate and position the platform
-            GameObject platform = GameObject.Instantiate(blockGameObject);
-            platform.transform.position = platformPosition;
+            GameObject platform =  GameObject.Instantiate(blockGameObject,platformPosition,Quaternion.identity) as GameObject;
+           // platform.transform.position = platformPosition;
+           // platform.transform.SetParent( jumpPads.transform,true) ;
             blocks.Add(platform);
         }
+      
 
         for(int i = 0;i<25;i++)
         {
