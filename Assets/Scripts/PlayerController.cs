@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 velocity;
 
-    bool isGrounded;
+    public bool isGrounded;
     public static bool isMoving;
 
     private Vector3 lastPosition = new Vector3(0,0,0);
