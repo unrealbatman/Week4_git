@@ -19,18 +19,24 @@ public class Weapon : MonoBehaviour
 
     public int  weaponCapacity;
     public int ammoLeft;
+    public int range;
+
+    public ParticleSystem muzzleFlash;
 
     public GameObject bullet;
     public int bulletSpeed;
     public Transform bulletSpawnPos;
     public float bulletLifetime = 3f;
-
+    
     public Transform aimingPosition, nonAimingPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        ammoLeft = weaponCapacity;    
+        ammoLeft = weaponCapacity;
+        transform.SetPositionAndRotation(nonAimingPosition.position, nonAimingPosition.rotation);
+
+
     }
 
     // Update is called once per frame
@@ -39,12 +45,14 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            this.transform.position = nonAimingPosition.position;
-         
+            transform.SetPositionAndRotation(nonAimingPosition.position, nonAimingPosition.rotation);
+
         }
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            this.transform.position = aimingPosition.position;
+            transform.SetPositionAndRotation(aimingPosition.position, aimingPosition.rotation);
+
+
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && ammoLeft>0)
         {
@@ -57,11 +65,25 @@ public class Weapon : MonoBehaviour
 
     public void FireWeapon()
     {
-        GameObject bulletIns = Instantiate(bullet, bulletSpawnPos.position, Quaternion.identity);
+        Camera cam = Camera.main;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, range))
+        {
+            Target target = hit.transform.GetComponent<Target>();
+            if (target != null)
+            {
 
-        bulletIns.GetComponent<Rigidbody>().AddForce(bulletSpeed * bulletSpawnPos.forward.normalized, ForceMode.Impulse);
+                //target.takeDamage
+            }
 
-        Destroy(bulletIns, bulletLifetime);
+
+            muzzleFlash.Play();
+            GameObject bulletIns = Instantiate(bullet, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(bulletIns, bulletLifetime);
+
+        }
+
+
+
     }
 
 
