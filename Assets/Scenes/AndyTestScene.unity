@@ -534,6 +534,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754029238}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &849391540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5064731392440936844, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
+  m_PrefabInstance: {fileID: 525260227368943686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1113978399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1195032524402651470, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
@@ -912,6 +917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 1458593731533441023, guid: ae66f28524c3f9c419015ada09d05154, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2596756021190110325, guid: ae66f28524c3f9c419015ada09d05154, type: 3}
       propertyPath: m_Size.x
       value: 0.99999994
@@ -1232,8 +1241,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5070827473671514573, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 849391540}
+    - target: {fileID: 5070827473671514573, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070827473671514573, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
       propertyPath: bottomClamp
       value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070827473671514573, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
+      propertyPath: xRotationLock
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070827473671514573, guid: ab265c3b4be58ff4c83733d31c14cd73, type: 3}
       propertyPath: mouseSensitivity
