@@ -21,8 +21,8 @@ public class PlatTypes : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         var _Rdr = GetComponent<Renderer>();
-        type = Random.Range(1,5);
-        
+        //type = Random.Range(1,5);
+        type = 4;
         
         if(type == 1){
             _Rdr.material = type1;
@@ -56,21 +56,20 @@ public class PlatTypes : MonoBehaviour
                 print("SpawnEnemy");
             }
             if(type == 4){
-                print("PrintRefuel");
+                print("Horizontal");
             }
             if(type == 5){
-                print("Bounce");
+                print("Vertical");
             }
             
         }
         }
     
     IEnumerator RevGrav(){
-        float grav = player.gravity;
-        player.gravity *= -1;
-        yield return new WaitForSeconds(5);
-        player.gravity *= -1;
-        Destroy(gameObject);
+        float og = player.gravity;
+        player.gravity = Mathf.Abs(og);
+        yield return new WaitForSeconds(2);
+        player.gravity = -Mathf.Abs(og);
     }
     
 }
