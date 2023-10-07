@@ -20,6 +20,8 @@ public class PlatTypes : MonoBehaviour
     private int direction = 1;
     public Vector3 spawnPoint;
     private Rigidbody rb;
+    
+    public GameObject play;
 
     int type;
 
@@ -31,7 +33,7 @@ public class PlatTypes : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         var _Rdr = GetComponent<Renderer>();
         //type = Random.Range(1,5);
-        type = 5;
+        type = 4;
         
         if(type == 1){
             _Rdr.material = type1;
@@ -66,11 +68,11 @@ public class PlatTypes : MonoBehaviour
             }
             if(type == 4){
                 print("Horizontal");
-                other.gameObject.transform.SetParent(transform);
+                play.transform.parent.parent = transform;
             }
             if(type == 5){
                 print("Vertical");
-                other.gameObject.transform.SetParent(transform);
+                other.gameObject.transform.parent.parent = transform;
             }
             
         }
@@ -78,7 +80,7 @@ public class PlatTypes : MonoBehaviour
 
     void OnCollisionExit(Collision other){
         if(other.gameObject.CompareTag("Player")){
-            other.gameObject.transform.SetParent(null);
+            play.transform.parent.parent = null;
         }
     }
     
@@ -101,7 +103,6 @@ public class PlatTypes : MonoBehaviour
 
     void Horizontal()
     {
-        print("here");
         float newPosition = transform.position.x + direction * speed * Time.deltaTime;
         if (newPosition > spawnPoint.x + rightBoundary)
         {

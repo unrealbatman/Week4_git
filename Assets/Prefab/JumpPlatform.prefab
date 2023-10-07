@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2596756021190110325}
   - component: {fileID: -4587757934507880266}
   - component: {fileID: 6084134151315961798}
+  - component: {fileID: 7719854742487217860}
   m_Layer: 6
   m_Name: JumpPlatform
   m_TagString: Untagged
@@ -105,7 +106,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.99999994, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-4587757934507880266
 MonoBehaviour:
@@ -137,3 +138,34 @@ MonoBehaviour:
   type3: {fileID: 2100000, guid: ff92fdf31cb81524da6f7c0f83146b01, type: 2}
   type4: {fileID: 2100000, guid: 9544ea614fc95ee49b0c28e57e00d51f, type: 2}
   type5: {fileID: 2100000, guid: cfb4ba2c4fb83104e95a1c7a23dda67e, type: 2}
+  speed: 10
+  leftBoundary: 0
+  rightBoundary: 10
+  spawnPoint: {x: 0, y: 0, z: 0}
+--- !u!54 &7719854742487217860
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458593731533441023}
+  serializedVersion: 4
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
