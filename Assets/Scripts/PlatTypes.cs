@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlatTypes : MonoBehaviour
 {
+    // Mats to represent what type it is
     public Material type1;
     public Material type2;
     public Material type3;
@@ -12,17 +13,25 @@ public class PlatTypes : MonoBehaviour
 
     private PlayerController player;
 
-    
+    // Moving Platforms variable
+    public float speed = 1f;
+    public float leftBoundary = -10.0f;
+    public float rightBoundary = 10.0f;
+    private int direction = 1;
+    public Vector3 spawnPoint;
+    private Rigidbody rb;
 
     int type;
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnPoint = transform.position;
+        rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         var _Rdr = GetComponent<Renderer>();
         //type = Random.Range(1,5);
-        type = 4;
+        type = 5;
         
         if(type == 1){
             _Rdr.material = type1;
@@ -57,13 +66,21 @@ public class PlatTypes : MonoBehaviour
             }
             if(type == 4){
                 print("Horizontal");
+                other.gameObject.transform.SetParent(transform);
             }
             if(type == 5){
                 print("Vertical");
+                other.gameObject.transform.SetParent(transform);
             }
             
         }
         }
+
+    void OnCollisionExit(Collision other){
+        if(other.gameObject.CompareTag("Player")){
+            other.gameObject.transform.SetParent(null);
+        }
+    }
     
     IEnumerator RevGrav(){
         float og = player.gravity;
@@ -71,5 +88,48 @@ public class PlatTypes : MonoBehaviour
         yield return new WaitForSeconds(2);
         player.gravity = -Mathf.Abs(og);
     }
+
+    void Update()
+    {
+        if(type == 4){
+            Horizontal();
+        }
+        else if(type == 5){
+            Vertical();
+        }
+    }
+
+    void Horizontal()
+    {
+        print("here");
+        float newPosition = transform.position.x + direction * speed * Time.deltaTime;
+        if (newPosition > spawnPoint.x + rightBoundary)
+        {
+            direction = -1;
+        }
+        else if (newPosition < spawnPoint.x + leftBoundary)
+        {
+            direction = 1;
+        }
+        Vector3 move = new Vector3(direction * speed, 0,0);
+        rb.velocity = move;
+    }
+
+    void Vertical()
+    {
+        
+        float newPosition = transform.position.y + direction * speed * Time.deltaTime;
+        if (newPosition > spawnPoint.y + rightBoundary)
+        {
+            direction = -1;
+        }
+        else if (newPosition < spawnPoint.y + leftBoundary)
+        {
+            direction = 1;
+        }
+        Vector3 move = new Vector3(0, direction * speed ,0);
+        rb.velocity = move;
+    }
+
     
 }
